@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troubleshooting Guide - SkyPilot Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            filter: brightness(0) invert(1);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+        }
+
+        .info-box h3 {
+            color: #1565c0;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-section {
+            margin-bottom: 3rem;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .video-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+        }
+
+        .video-header h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-model {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-description {
+            padding: 1.5rem 2rem;
+            background: #f8f9fa;
+        }
+
+        .category-header {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 3rem 0 2rem 0;
+        }
+
+        .category-header h2 {
+            color: #667eea;
+            font-size: 2rem;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">✈️ SkyPilot Hub</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="safety.html">Safety & Licensing</a></li>
+                <li><a href="locations.html">Flying Locations</a></li>
+                <li><a href="deals.html">Deals Tracker</a></li>
+                <li><a href="troubleshooting.html">Troubleshooting</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h1>DJI Drone Troubleshooting Guide</h1>
+        <p>Video tutorials for common DJI drone issues</p>
+    </section>
+
+    <div class="container">
+        <div class="info-box">
+            <h3>🔧 Quick Tips Before Watching</h3>
+            <p>These videos cover the most common issues DJI drone owners face. Before diving in, make sure your drone's firmware is up to date through the DJI Fly app, and always perform a pre-flight check. Most issues can be resolved with simple troubleshooting steps!</p>
+        </div>
+
+        <!-- DJI Mini Series -->
+        <div class="category-header">
+            <h2>DJI Mini Series Troubleshooting</h2>
+            <p>Solutions for Mini 4 Pro, Mini 3 Pro, Mini 2, and Mini SE</p>
+        </div>
+
+        <div class="video-section">
+            <div class="video-card">
+                <div class="video-header">
+                    <h3>How to Fix DJI Mini 4 Pro GPS Signal Issues</h3>
+                    <p class="video-model">Applicable to: Mini 4 Pro, Mini 3 Pro, Mini 2</p>
+                </div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/K5VQ3c3gxYY" allowfullscreen></iframe>
+                </div>
+                <div class="video-description">
+                    <p><strong>Common Issue:</strong> "No GPS Signal" or weak GPS connection preventing takeoff or enabling intelligent flight modes.</p>
+                    <p><strong>Covers:</strong> Calibrating compass, checking for interference, optimal satellite acquisition</p>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-header">
+                    <h3>DJI Mini 3 Pro - Gimbal Calibration & Overload Error Fix</h3>
+                    <p class="video-model">Applicable to: Mini 4 Pro, Mini 3 Pro, Mini 3</p>
+                </div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/rHwBMAcvN3E" allowfullscreen></iframe>
+                </div>
+                <div class="video-description">
+                    <p><strong>Common Issue:</strong> Gimbal motor overload error, camera tilted or shaking, gimbal not stabilizing properly.</p>
+                    <p><strong>Covers:</strong> Manual gimbal calibration, checking for obstructions, firmware updates</p>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-header">
+                    <h3>DJI Mini 2 Won't Connect to Controller - Complete Fix</h3>
+                    <p class="video-model">Applicable to: Mini 2, Mini SE, Mini 1</p>
+                </div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/Zy4hHq8428I" allowfullscreen></iframe>
+                </div>
+                <div class="video-description">
+                    <p><strong>Common Issue:</strong> Drone not linking to remote controller, connection drops frequently.</p>
+                    <p><strong>Covers:</strong> Re-linking process, firmware sync, controller reset</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- DJI Mavic & Air Series -->
+        <div class="category-header">
+            <h2>DJI Mavic & Air Series Troubleshooting</h2>
+            <p>Solutions for Mavic 3, Air 3, Air 2S, and Mavic Air 2</p>
+        </div>
+
+        <div class="video-section">
+            <div class="video-card">
+                <div class="video-header">
+                    <h3>DJI Mavic 3 - How to Fix Vision Sensor Errors</h3>
+                    <p class="video-model">Applicable to: Mavic 3 Pro, Mavic 3, Air 3</p>
+                </div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/xk4d3A8WP-I" allowfullscreen></iframe>
+                </div>
+                <div class="video-description">
+                    <p><strong>Common Issue:</strong> Vision positioning system error, obstacle avoidance not working, sensors blocked warning.</p>
+                    <p><strong>Covers:</strong> Cleaning vision sensors, calibration process, environmental considerations</p>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-header">
+                    <h3>DJI Air 3 & Air 2S Battery Not Charging - Solutions</h3>
+                    <p class="video-model">Applicable to: Air 3, Air 2S, Mavic Air 2</p>
+                </div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/yQqO0kCfG2I" allowfullscreen></iframe>
+                </div>
+                <div class="video-description">
+                    <p><strong>Common Issue:</strong> Battery won't charge, charging LED not lighting up, battery error codes.</p>
+                    <p><strong>Covers:</strong> Battery maintenance, proper charging procedure, troubleshooting charging hub</p>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-header">
+                    <h3>Fix DJI Air 2S Disconnection & Signal Loss Issues</h3>
+                    <p class="video-model">Applicable to: Air 2S, Mavic Air 2, Mini 3 Pro</p>
+                </div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/N3TYcQC_wH4" allowfullscreen></iframe>
+                </div>
+                <div class="video-description">
+                    <p><strong>Common Issue:</strong> Video transmission cutting out, weak signal warnings, loss of connection during flight.</p>
+                    <p><strong>Covers:</strong> Antenna positioning, interference sources, transmission settings optimization</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- General DJI Issues -->
+        <div class="category-header">
+            <h2>General DJI Drone Issues</h2>
+            <p>Common problems affecting multiple DJI models</p>
+        </div>
+
+        <div class="video-section">
+            <div class="video-card">
+                <div class="video-header">
+                    <h3>How to Update DJI Drone Firmware Properly</h3>
+                    <p class="video-model">Applicable to: All DJI drones</p>
+                </div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/9zCBvBFj-f0" allowfullscreen></iframe>
+                </div>
+                <div class="video-description">
+                    <p><strong>Common Issue:</strong> Firmware update failures, stuck updates, version mismatch errors.</p>
+                    <p><strong>Covers:</strong> Step-by-step firmware update process, troubleshooting failed updates, downgrading firmware</p>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-header">
+                    <h3>DJI Fly App Crashing & Connection Problems - Complete Guide</h3>
+                    <p class="video-model">Applicable to: All DJI drones using DJI Fly app</p>
+                </div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/VF_kSP0Qozg" allowfullscreen></iframe>
+                </div>
+                <div class="video-description">
+                    <p><strong>Common Issue:</strong> DJI Fly app keeps crashing, won't connect to drone, freezing during flight.</p>
+                    <p><strong>Covers:</strong> App cache clearing, reinstallation, device compatibility, troubleshooting steps</p>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-header">
+                    <h3>DJI Drone Motor Issues - How to Diagnose & Fix</h3>
+                    <p class="video-model">Applicable to: All DJI drones</p>
+                </div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/jhVW8A6LqUc" allowfullscreen></iframe>
+                </div>
+                <div class="video-description">
+                    <p><strong>Common Issue:</strong> Motor not starting, unusual motor sounds, motor error codes, propeller not spinning.</p>
+                    <p><strong>Covers:</strong> Motor diagnostics, cleaning procedures, when to replace motors</p>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-header">
+                    <h3>How to Perform IMU Calibration on DJI Drones</h3>
+                    <p class="video-model">Applicable to: All DJI drones</p>
+                </div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/L68aSFTzBGY" allowfullscreen></iframe>
+                </div>
+                <div class="video-description">
+                    <p><strong>Common Issue:</strong> IMU error warnings, drift during hover, unstable flight behavior.</p>
+                    <p><strong>Covers:</strong> Complete IMU calibration process, when calibration is needed, verification steps</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box" style="background: #fff3cd; border-color: #ffc107; margin-top: 3rem;">
+            <h3 style="color: #856404;">💡 Still Having Issues?</h3>
+            <p><strong>DJI Support:</strong> Visit support.dji.com for official troubleshooting guides and live chat support.</p>
+            <p><strong>Community Forums:</strong> Check out r/dji on Reddit and the official DJI forums for community solutions.</p>
+            <p><strong>DJI Care Refresh:</strong> If you have DJI Care Refresh, you can request a replacement for hardware failures.</p>
+            <p><strong>Local Repair:</strong> For physical damage, contact an authorized DJI repair center or use DJI's mail-in repair service.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 SkyPilot Hub. Fly Safe, Fly Smart. Created for drone enthusiasts in California.</p>
+    </footer>
+</body>
+</html>
