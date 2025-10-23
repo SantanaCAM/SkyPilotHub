@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flying Locations - SkyPilot Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            background: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .county-section {
+            margin-bottom: 4rem;
+        }
+
+        .county-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .county-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .location-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .location-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .location-icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 3rem;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .location-content {
+            padding: 1.5rem;
+        }
+
+        .location-content h3 {
+            color: #667eea;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .location-details {
+            margin: 1rem 0;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .detail-icon {
+            margin-right: 0.5rem;
+            min-width: 20px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        .status-open {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .status-restricted {
+            background: #fef5e7;
+            color: #7d6608;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+        }
+
+        .info-box h3 {
+            color: #1565c0;
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .locations-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="logo.png" alt="SkyPilot Hub Logo" class="logo-img">
+                SkyPilot Hub
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="safety.html">Safety & Licensing</a></li>
+                <li><a href="locations.html">Flying Locations</a></li>
+                <li><a href="deals.html">Deals Tracker</a></li>
+                <li><a href="troubleshooting.html">Troubleshooting</a></li>
+                <li><a href="community.html">Community</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h1>Drone-Friendly Flying Locations</h1>
+        <p>Discover the best spots to fly in the Central Valley and Bay Area</p>
+    </section>
+
+    <div class="container">
+        <div class="info-box">
+            <h3>⚠️ Before You Fly</h3>
+            <p>Always check current airspace restrictions using the B4UFLY app or AirMap before flying at any location. Conditions can change due to temporary flight restrictions, emergency operations, or special events. Respect private property and obtain permission when necessary.</p>
+        </div>
+
+        <!-- San Joaquin County -->
+        <section class="county-section">
+            <div class="county-header">
+                <h2>📍 San Joaquin County</h2>
+                <p>Great open spaces perfect for drone photography and practice flights</p>
+            </div>
+
+            <div class="locations-grid">
+                <div class="location-card">
+                    <div class="location-icon">🏞️</div>
+                    <div class="location-content">
+                        <h3>Micke Grove Regional Park</h3>
+                        <div class="location-details">
+                            <div class="detail-item">
+                                <span class="detail-icon">📍</span>
+                                <span>11793 N Micke Grove Rd, Lodi, CA</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">✈️</span>
+                                <span>Class G airspace - Generally clear for flying</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">📸</span>
+                                <span>Great for: Nature photography, lake views, wildlife</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">⚠️</span>
+                                <span>Check local park regulations before flying</span>
+                            </div>
+                        </div>
+                        <span class="status-badge status-open">Generally Allowed</span>
+                    </div>
+                </div>
+
+                <div class="location-card">
+                    <div class="location-icon">🌾</div>
+                    <div class="location-content">
+                        <h3>Delta Waterways</h3>
+                        <div class="location-details">
+                            <div class="detail-item">
+                                <span class="detail-icon">📍</span>
+                                <span>Various locations along the Sacramento-San Joaquin Delta</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">✈️</span>
+                                <span>Class G airspace - Open for recreational use</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">📸</span>
+                                <span>Great for: Sunset shots, water landscapes, boats</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">⚠️</span>
+                                <span>Stay away from bridges and avoid private marinas</span>
+                            </div>
+                        </div>
+                        <span class="status-badge status-open">Generally Allowed</span>
+                    </div>
+                </div>
+
+                <div class="location-card">
+                    <div class="location-icon">🌳</div>
+                    <div class="location-content">
+                        <h3>Oak Grove Regional Park</h3>
+                        <div class="location-details">
+                            <div class="detail-item">
+                                <span class="detail-icon">📍</span>
+                                <span>4520 W Eight Mile Rd, Stockton, CA</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">✈️</span>
+                                <span>Class G airspace - Clear for flying</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">📸</span>
+                                <span>Great for: Practice flights, wide open areas</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">⚠️</span>
+                                <span>Verify with park staff about current drone policies</span>
+                            </div>
+                        </div>
+                        <span class="status-badge status-open">Generally Allowed</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stanislaus County -->
+        <section class="county-section">
+            <div class="county-header">
+                <h2>📍 Stanislaus County</h2>
+                <p>Scenic agricultural landscapes and river locations</p>
+            </div>
+
+            <div class="locations-grid">
+                <div class="location-card">
+                    <div class="location-icon">🏞️</div>
+                    <div class="location-content">
+                        <h3>Knights Ferry Recreation Area</h3>
+                        <div class="location-details">
+                            <div class="detail-item">
+                                <span class="detail-icon">📍</span>
+                                <span>17968 Covered Bridge Rd, Knights Ferry, CA</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">✈️</span>
+                                <span>Class G airspace - Open for flying</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">📸</span>
+                                <span>Great for: River views, historic bridge, nature</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">⚠️</span>
+                                <span>Respect recreationists and keep safe distance</span>
+                            </div>
+                        </div>
+                        <span class="status-badge status-open">Generally Allowed</span>
+                    </div>
+                </div>
+
+                <div class="location-card">
+                    <div class="location-icon">🌾</div>
+                    <div class="location-content">
+                        <h3>Modesto Reservoir Regional Park</h3>
+                        <div class="location-details">
+                            <div class="detail-item">
+                                <span class="detail-icon">📍</span>
+                                <span>18143 Reservoir Rd, Waterford, CA</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">✈️</span>
+                                <span>Class G airspace - Generally clear</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">📸</span>
+                                <span>Great for: Water shots, camping areas, sunsets</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">⚠️</span>
+                                <span>Check with park rangers about specific zones</span>
+                            </div>
+                        </div>
+                        <span class="status-badge status-open">Generally Allowed</span>
+                    </div>
+                </div>
+
+                <div class="location-card">
+                    <div class="location-icon">🌳</div>
+                    <div class="location-content">
+                        <h3>Tuolumne River Regional Park</h3>
+                        <div class="location-details">
+                            <div class="detail-item">
+                                <span class="detail-icon">📍</span>
+                                <span>Beard Rd, Modesto, CA</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">✈️</span>
+                                <span>Class G airspace - Safe to fly</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">📸</span>
+                                <span>Great for: River trails, wildlife, open fields</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">⚠️</span>
+                                <span>Avoid flying directly over crowded areas</span>
+                            </div>
+                        </div>
+                        <span class="status-badge status-open">Generally Allowed</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bay Area -->
+        <section class="county-section">
+            <div class="county-header">
+                <h2>📍 Bay Area (San Mateo & Surrounding)</h2>
+                <p>Coastal views and urban landscapes - check airspace carefully</p>
+            </div>
+
+            <div class="locations-grid">
+                <div class="location-card">
+                    <div class="location-icon">🌊</div>
+                    <div class="location-content">
+                        <h3>Coyote Point Recreation Area</h3>
+                        <div class="location-details">
+                            <div class="detail-item">
+                                <span class="detail-icon">📍</span>
+                                <span>1701 Coyote Point Dr, San Mateo, CA</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">✈️</span>
+                                <span>Class E airspace - Check for SFO restrictions</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">📸</span>
+                                <span>Great for: Bay views, beach, wildlife</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">⚠️</span>
+                                <span>LAANC authorization may be required</span>
+                            </div>
+                        </div>
+                        <span class="status-badge status-restricted">Check Restrictions</span>
+                    </div>
+                </div>
+
+                <div class="location-card">
+                    <div class="location-icon">🏔️</div>
+                    <div class="location-content">
+                        <h3>San Bruno Mountain State Park</h3>
+                        <div class="location-details">
+                            <div class="detail-item">
+                                <span class="detail-icon">📍</span>
+                                <span>555 Guadalupe Canyon Pkwy, Brisbane, CA</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">✈️</span>
+                                <span>Class E airspace - Near SFO, check B4UFLY</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">📸</span>
+                                <span>Great for: City views, mountain landscapes</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">⚠️</span>
+                                <span>State parks may have specific drone restrictions</span>
+                            </div>
+                        </div>
+                        <span class="status-badge status-restricted">Check Restrictions</span>
+                    </div>
+                </div>
+
+                <div class="location-card">
+                    <div class="location-icon">🌳</div>
+                    <div class="location-content">
+                        <h3>Central Park (San Mateo)</h3>
+                        <div class="location-details">
+                            <div class="detail-item">
+                                <span class="detail-icon">📍</span>
+                                <span>50 E 5th Ave, San Mateo, CA</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">✈️</span>
+                                <span>Class E airspace - Check for airport zones</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">📸</span>
+                                <span>Great for: Gardens, Japanese tea garden, practice</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">⚠️</span>
+                                <span>Verify city ordinances before flying</span>
+                            </div>
+                        </div>
+                        <span class="status-badge status-restricted">Check Restrictions</span>
+                    </div>
+                </div>
+
+                <div class="location-card">
+                    <div class="location-icon">🏖️</div>
+                    <div class="location-content">
+                        <h3>Pacifica State Beach</h3>
+                        <div class="location-details">
+                            <div class="detail-item">
+                                <span class="detail-icon">📍</span>
+                                <span>Pacifica, CA (multiple beach access points)</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">✈️</span>
+                                <span>Class G/E airspace - Generally clear</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">📸</span>
+                                <span>Great for: Ocean shots, cliffs, surfers</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">⚠️</span>
+                                <span>Respect beachgoers and wildlife</span>
+                            </div>
+                        </div>
+                        <span class="status-badge status-open">Generally Allowed</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="info-box" style="background: #fff3cd; border-color: #ffc107;">
+            <h3 style="color: #856404;">💡 Pro Tips for Finding Flying Locations</h3>
+            <p><strong>Use AirMap or B4UFLY:</strong> These apps show real-time airspace information and help you find legal flying spots near you.</p>
+            <p><strong>Join local Facebook groups:</strong> Connect with other Bay Area and Central Valley drone pilots who share their favorite locations.</p>
+            <p><strong>Scout locations ahead of time:</strong> Visit potential flying spots without your drone first to assess safety, crowds, and conditions.</p>
+            <p><strong>Respect "No Drone" signs:</strong> If a location explicitly prohibits drones, honor those rules even if airspace is technically clear.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 SkyPilot Hub. Fly Safe, Fly Smart. Created for drone enthusiasts in California.</p>
+    </footer>
+</body>
+</html>

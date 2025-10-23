@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deals Tracker - SkyPilot Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            background: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .info-box {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+        }
+
+        .info-box h3 {
+            color: #2e7d32;
+            margin-bottom: 0.5rem;
+        }
+
+        .deals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .deal-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .deal-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .deal-image {
+            background: #f8f9fa;
+            padding: 2rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 250px;
+        }
+
+        .deal-image img {
+            max-width: 100%;
+            max-height: 220px;
+            object-fit: contain;
+        }
+
+        .deal-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .deal-content h3 {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .price-tag {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4caf50;
+            margin: 1rem 0;
+        }
+
+        .specs-list {
+            list-style: none;
+            margin: 1rem 0;
+            flex-grow: 1;
+        }
+
+        .specs-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.95rem;
+        }
+
+        .specs-list li:last-child {
+            border-bottom: none;
+        }
+
+        .specs-list strong {
+            color: #667eea;
+        }
+
+        .deal-button {
+            display: block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: auto;
+        }
+
+        .deal-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .category-header {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 3rem 0 2rem 0;
+        }
+
+        .category-header h2 {
+            color: #667eea;
+            font-size: 2rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-pro {
+            background: #ffd700;
+            color: #856404;
+        }
+
+        .badge-popular {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .badge-beginner {
+            background: #4ecdc4;
+            color: white;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .deals-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="logo.png" alt="SkyPilot Hub Logo" class="logo-img">
+                SkyPilot Hub
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="safety.html">Safety & Licensing</a></li>
+                <li><a href="locations.html">Flying Locations</a></li>
+                <li><a href="deals.html">Deals Tracker</a></li>
+                <li><a href="troubleshooting.html">Troubleshooting</a></li>
+                <li><a href="community.html">Community</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h1>DJI Drone Deals Tracker</h1>
+        <p>Find the best prices on popular DJI drones</p>
+    </section>
+
+    <div class="container">
+        <div class="info-box">
+            <h3>💰 Smart Shopping Tips</h3>
+            <p>DJI drones typically go on sale during major shopping events like Black Friday, Prime Day, and back-to-school season. Prices shown are approximate MSRP - click through to Amazon to see current pricing and deals. Consider buying fly-more combos for better value with extra batteries and accessories!</p>
+        </div>
+
+        <!-- Professional Drones -->
+        <div class="category-header">
+            <h2>🎬 Professional & Advanced Drones</h2>
+            <p>High-end models for serious content creators and professionals</p>
+        </div>
+
+        <div class="deals-grid">
+            <div class="deal-card">
+                <div class="deal-image">
+                    <img src="mavic-3-pro.png" alt="DJI Mavic 3 Pro">
+                </div>
+                <div class="deal-content">
+                    <span class="badge badge-pro">PRO</span>
+                    <h3>DJI Mavic 3 Pro</h3>
+                    <p class="price-tag">$2,199</p>
+                    <ul class="specs-list">
+                        <li><strong>Camera:</strong> Hasselblad + Telephoto</li>
+                        <li><strong>Flight Time:</strong> 43 minutes</li>
+                        <li><strong>Range:</strong> 9.3 miles</li>
+                        <li><strong>Video:</strong> 5.1K at 50fps</li>
+                        <li><strong>Best For:</strong> Professional cinematography</li>
+                    </ul>
+                    <a href="https://www.amazon.com/s?k=DJI+Mavic+3+Pro" target="_blank" class="deal-button">Check Price on Amazon →</a>
+                </div>
+            </div>
+
+            <div class="deal-card">
+                <div class="deal-image">
+                    <img src="air-3.png" alt="DJI Air 3">
+                </div>
+                <div class="deal-content">
+                    <span class="badge badge-pro">PRO</span>
+                    <h3>DJI Air 3</h3>
+                    <p class="price-tag">$1,099</p>
+                    <ul class="specs-list">
+                        <li><strong>Camera:</strong> Dual primary cameras</li>
+                        <li><strong>Flight Time:</strong> 46 minutes</li>
+                        <li><strong>Range:</strong> 12.4 miles</li>
+                        <li><strong>Video:</strong> 4K at 100fps</li>
+                        <li><strong>Best For:</strong> Advanced aerial photography</li>
+                    </ul>
+                    <a href="https://www.amazon.com/s?k=DJI+Air+3" target="_blank" class="deal-button">Check Price on Amazon →</a>
+                </div>
+            </div>
+
+            <div class="deal-card">
+                <div class="deal-image">
+                    <img src="inspire-3.png" alt="DJI Inspire 3">
+                </div>
+                <div class="deal-content">
+                    <span class="badge badge-pro">PRO</span>
+                    <h3>DJI Inspire 3</h3>
+                    <p class="price-tag">$16,499</p>
+                    <ul class="specs-list">
+                        <li><strong>Camera:</strong> Full-frame cinema camera</li>
+                        <li><strong>Flight Time:</strong> 28 minutes</li>
+                        <li><strong>Video:</strong> 8K at 75fps</li>
+                        <li><strong>Features:</strong> 360° rotating gimbal</li>
+                        <li><strong>Best For:</strong> Hollywood-level productions</li>
+                    </ul>
+                    <a href="https://www.amazon.com/s?k=DJI+Inspire+3" target="_blank" class="deal-button">Check Price on Amazon →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Consumer Drones -->
+        <div class="category-header">
+            <h2>🌟 Consumer & Enthusiast Drones</h2>
+            <p>Perfect balance of features and affordability for hobbyists</p>
+        </div>
+
+        <div class="deals-grid">
+            <div class="deal-card">
+                <div class="deal-image">
+                    <img src="mini-4-pro.png" alt="DJI Mini 4 Pro">
+                </div>
+                <div class="deal-content">
+                    <span class="badge badge-popular">MOST POPULAR</span>
+                    <h3>DJI Mini 4 Pro</h3>
+                    <p class="price-tag">$759</p>
+                    <ul class="specs-list">
+                        <li><strong>Weight:</strong> Under 249g (no FAA registration)</li>
+                        <li><strong>Flight Time:</strong> 34 minutes</li>
+                        <li><strong>Range:</strong> 15.5 miles</li>
+                        <li><strong>Video:</strong> 4K at 100fps with HDR</li>
+                        <li><strong>Best For:</strong> Travel and everyday use</li>
+                    </ul>
+                    <a href="https://www.amazon.com/s?k=DJI+Mini+4+Pro" target="_blank" class="deal-button">Check Price on Amazon →</a>
+                </div>
+            </div>
+
+            <div class="deal-card">
+                <div class="deal-image">
+                    <img src="air-2s.png" alt="DJI Air 2S">
+                </div>
+                <div class="deal-content">
+                    <span class="badge badge-popular">POPULAR</span>
+                    <h3>DJI Air 2S</h3>
+                    <p class="price-tag">$999</p>
+                    <ul class="specs-list">
+                        <li><strong>Camera:</strong> 1-inch CMOS sensor</li>
+                        <li><strong>Flight Time:</strong> 31 minutes</li>
+                        <li><strong>Range:</strong> 7.5 miles</li>
+                        <li><strong>Video:</strong> 5.4K at 30fps</li>
+                        <li><strong>Best For:</strong> Serious hobbyists</li>
+                    </ul>
+                    <a href="https://www.amazon.com/s?k=DJI+Air+2S" target="_blank" class="deal-button">Check Price on Amazon →</a>
+                </div>
+            </div>
+
+            <div class="deal-card">
+                <div class="deal-image">
+                    <img src="mavic-air-2.png" alt="DJI Mavic Air 2">
+                </div>
+                <div class="deal-content">
+                    <span class="badge badge-popular">GREAT VALUE</span>
+                    <h3>DJI Mavic Air 2</h3>
+                    <p class="price-tag">$799</p>
+                    <ul class="specs-list">
+                        <li><strong>Camera:</strong> 48MP photos, 4K video</li>
+                        <li><strong>Flight Time:</strong> 34 minutes</li>
+                        <li><strong>Range:</strong> 6.2 miles</li>
+                        <li><strong>Video:</strong> 4K at 60fps</li>
+                        <li><strong>Best For:</strong> Content creators on budget</li>
+                    </ul>
+                    <a href="https://www.amazon.com/s?k=DJI+Mavic+Air+2" target="_blank" class="deal-button">Check Price on Amazon →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Beginner Drones -->
+        <div class="category-header">
+            <h2>🎓 Beginner-Friendly Drones</h2>
+            <p>Easy to fly and perfect for learning</p>
+        </div>
+
+        <div class="deals-grid">
+            <div class="deal-card">
+                <div class="deal-image">
+                    <img src="mini-3.png" alt="DJI Mini 3">
+                </div>
+                <div class="deal-content">
+                    <span class="badge badge-beginner">BEST FOR BEGINNERS</span>
+                    <h3>DJI Mini 3</h3>
+                    <p class="price-tag">$569</p>
+                    <ul class="specs-list">
+                        <li><strong>Weight:</strong> Under 249g (no registration)</li>
+                        <li><strong>Flight Time:</strong> 38 minutes</li>
+                        <li><strong>Range:</strong> 6.2 miles</li>
+                        <li><strong>Video:</strong> 4K at 30fps</li>
+                        <li><strong>Best For:</strong> First-time drone pilots</li>
+                    </ul>
+                    <a href="https://www.amazon.com/s?k=DJI+Mini+3" target="_blank" class="deal-button">Check Price on Amazon →</a>
+                </div>
+            </div>
+
+            <div class="deal-card">
+                <div class="deal-image">
+                    <img src="mini-se.png" alt="DJI Mini SE">
+                </div>
+                <div class="deal-content">
+                    <span class="badge badge-beginner">BEGINNER</span>
+                    <h3>DJI Mini SE</h3>
+                    <p class="price-tag">$299</p>
+                    <ul class="specs-list">
+                        <li><strong>Weight:</strong> Under 249g (no registration)</li>
+                        <li><strong>Flight Time:</strong> 30 minutes</li>
+                        <li><strong>Range:</strong> 2.5 miles</li>
+                        <li><strong>Video:</strong> 2.7K at 30fps</li>
+                        <li><strong>Best For:</strong> Budget-conscious beginners</li>
+                    </ul>
+                    <a href="https://www.amazon.com/s?k=DJI+Mini+SE" target="_blank" class="deal-button">Check Price on Amazon →</a>
+                </div>
+            </div>
+
+            <div class="deal-card">
+                <div class="deal-image">
+                    <img src="mini-2.png" alt="DJI Mini 2">
+                </div>
+                <div class="deal-content">
+                    <span class="badge badge-beginner">EASY TO FLY</span>
+                    <h3>DJI Mini 2</h3>
+                    <p class="price-tag">$449</p>
+                    <ul class="specs-list">
+                        <li><strong>Weight:</strong> Under 249g (no registration)</li>
+                        <li><strong>Flight Time:</strong> 31 minutes</li>
+                        <li><strong>Range:</strong> 6.2 miles</li>
+                        <li><strong>Video:</strong> 4K at 30fps</li>
+                        <li><strong>Best For:</strong> Learning aerial photography</li>
+                    </ul>
+                    <a href="https://www.amazon.com/s?k=DJI+Mini+2" target="_blank" class="deal-button">Check Price on Amazon →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- FPV Drones -->
+        <div class="category-header">
+            <h2>🏁 FPV & Racing Drones</h2>
+            <p>Immersive flying experience for thrill-seekers</p>
+        </div>
+
+        <div class="deals-grid">
+            <div class="deal-card">
+                <div class="deal-image">
+                    <img src="avata-2.png" alt="DJI Avata 2">
+                </div>
+                <div class="deal-content">
+                    <span class="badge badge-popular">FPV</span>
+                    <h3>DJI Avata 2</h3>
+                    <p class="price-tag">$999</p>
+                    <ul class="specs-list">
+                        <li><strong>Type:</strong> Cinewhoop FPV drone</li>
+                        <li><strong>Flight Time:</strong> 23 minutes</li>
+                        <li><strong>Video:</strong> 4K at 60fps</li>
+                        <li><strong>Features:</strong> Built-in propeller guards</li>
+                        <li><strong>Best For:</strong> FPV beginners, cinematic FPV</li>
+                    </ul>
+                    <a href="https://www.amazon.com/s?k=DJI+Avata+2" target="_blank" class="deal-button">Check Price on Amazon →</a>
+                </div>
+            </div>
+
+            <div class="deal-card">
+                <div class="deal-image">
+                    <img src="dji-fpv.png" alt="DJI FPV">
+                </div>
+                <div class="deal-content">
+                    <span class="badge badge-popular">FPV</span>
+                    <h3>DJI FPV</h3>
+                    <p class="price-tag">$1,299</p>
+                    <ul class="specs-list">
+                        <li><strong>Type:</strong> Hybrid FPV racing drone</li>
+                        <li><strong>Flight Time:</strong> 20 minutes</li>
+                        <li><strong>Top Speed:</strong> 87 mph</li>
+                        <li><strong>Video:</strong> 4K at 60fps</li>
+                        <li><strong>Best For:</strong> Experienced FPV pilots</li>
+                    </ul>
+                    <a href="https://www.amazon.com/s?k=DJI+FPV+Combo" target="_blank" class="deal-button">Check Price on Amazon →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box" style="background: #fff3cd; border-color: #ffc107; margin-top: 3rem;">
+            <h3 style="color: #856404;">💡 Buying Tips</h3>
+            <p><strong>Fly-More Combos:</strong> Usually the best value - includes extra batteries, charging hub, and carrying case.</p>
+            <p><strong>DJI Care Refresh:</strong> Consider adding insurance for accidental damage coverage.</p>
+            <p><strong>Check Reviews:</strong> Read Amazon reviews and watch YouTube comparisons before purchasing.</p>
+            <p><strong>Authorized Dealers:</strong> Buy from Amazon or authorized DJI dealers to ensure warranty coverage.</p>
+            <p><strong>Watch for Bundles:</strong> Sometimes third-party sellers bundle drones with SD cards and accessories at better prices.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 SkyPilot Hub. Fly Safe, Fly Smart. Created for drone enthusiasts in California.</p>
+    </footer>
+</body>
+</html>
