@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safety & Licensing - SkyPilot Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            background: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid #667eea;
+            padding-left: 1rem;
+        }
+
+        .dos-donts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .dos, .donts {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .dos {
+            border-top: 5px solid #48bb78;
+        }
+
+        .donts {
+            border-top: 5px solid #f56565;
+        }
+
+        .dos h3 {
+            color: #48bb78;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .donts h3 {
+            color: #f56565;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dos ul, .donts ul {
+            list-style: none;
+        }
+
+        .dos li, .donts li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.05rem;
+        }
+
+        .dos li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #48bb78;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .donts li::before {
+            content: "✗";
+            position: absolute;
+            left: 0;
+            color: #f56565;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .license-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            margin-top: 2rem;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .license-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .step {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .step-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .step h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s;
+            margin-top: 1.5rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+        }
+
+        .info-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        .info-box h4 {
+            color: #856404;
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .dos-donts {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="logo.png" alt="SkyPilot Hub Logo" class="logo-img">
+                SkyPilot Hub
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="safety.html">Safety & Licensing</a></li>
+                <li><a href="locations.html">Flying Locations</a></li>
+                <li><a href="deals.html">Deals Tracker</a></li>
+                <li><a href="troubleshooting.html">Troubleshooting</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h1>Safety Guidelines & Licensing</h1>
+        <p>Fly responsibly, legally, and with confidence</p>
+    </section>
+
+    <div class="container">
+        <section class="section">
+            <h2>Essential Drone Do's and Don'ts</h2>
+            
+            <div class="dos-donts">
+                <div class="dos">
+                    <h3>✓ DO's</h3>
+                    <ul>
+                        <li>Always check weather conditions before flying</li>
+                        <li>Keep your drone within visual line of sight</li>
+                        <li>Fly below 400 feet in uncontrolled airspace</li>
+                        <li>Respect privacy and property rights</li>
+                        <li>Register your drone with the FAA (if over 0.55 lbs)</li>
+                        <li>Check for temporary flight restrictions (TFRs)</li>
+                        <li>Conduct pre-flight inspections of your equipment</li>
+                        <li>Use apps like B4UFLY to check airspace status</li>
+                        <li>Fly during daylight or civil twilight with proper lighting</li>
+                        <li>Maintain a safe distance from people and airports</li>
+                    </ul>
+                </div>
+
+                <div class="donts">
+                    <h3>✗ DON'Ts</h3>
+                    <ul>
+                        <li>Never fly near airports without authorization</li>
+                        <li>Don't fly over people or moving vehicles</li>
+                        <li>Never fly under the influence of drugs or alcohol</li>
+                        <li>Don't fly in National Parks (it's prohibited)</li>
+                        <li>Never interfere with emergency operations</li>
+                        <li>Don't fly over stadiums or sporting events</li>
+                        <li>Never fly at night without proper waiver and lighting</li>
+                        <li>Don't ignore airspace restrictions</li>
+                        <li>Never fly recklessly or dangerously</li>
+                        <li>Don't assume you can fly anywhere you want</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4>⚠️ Important Reminder</h4>
+                <p>California has additional state laws regarding drones. Always research local ordinances in the county or city where you plan to fly. Some municipalities have specific restrictions on drone use in public parks and spaces.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Getting Your Part 107 License</h2>
+            <p>If you're planning to fly commercially or want to become a certified drone pilot, you'll need a Part 107 Remote Pilot Certificate from the FAA. Even for recreational pilots, understanding Part 107 regulations is valuable.</p>
+
+            <div class="license-card">
+                <h3>How to Get Your Part 107 License</h3>
+                <p>Follow these steps to become a certified remote pilot:</p>
+
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h4>Eligibility</h4>
+                        <p>Be at least 16 years old, able to read and speak English, and physically and mentally fit to fly.</p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h4>Study</h4>
+                        <p>Study the aeronautical knowledge areas. Free resources available online or use paid courses.</p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h4>Register</h4>
+                        <p>Create an FAA Tracking Number (FTN) at iacra.faa.gov to schedule your test.</p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h4>Take Test</h4>
+                        <p>Pass the Part 107 exam at an FAA-approved testing center. Cost is $175.</p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <h4>Get Certified</h4>
+                        <p>Complete your application in IACRA and receive your certificate in 6-8 weeks.</p>
+                    </div>
+                </div>
+
+                <a href="https://www.faa.gov/uas/commercial_operators/become_a_drone_pilot" target="_blank" class="cta-button">Visit FAA Part 107 Page</a>
+            </div>
+
+            <div class="info-box" style="margin-top: 2rem; background: #d1ecf1; border-color: #0c5460;">
+                <h4 style="color: #0c5460;">📱 Recommended Apps</h4>
+                <p><strong>B4UFLY (FAA):</strong> Check airspace status and restrictions before every flight<br>
+                <strong>AirMap:</strong> Real-time airspace information and flight planning<br>
+                <strong>UAV Forecast:</strong> Weather conditions specifically for drone flying<br>
+                <strong>Aloft:</strong> LAANC authorizations for controlled airspace</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Recreational vs Commercial Flying</h2>
+            <p><strong>Recreational Flying:</strong> If you're flying purely for fun, you must follow The Exception for Recreational Flyers. This means flying for enjoyment only, following community-based safety guidelines, keeping your drone within visual line of sight, and notifying airports and air traffic control when flying within 5 miles of an airport.</p>
+            
+            <p style="margin-top: 1rem;"><strong>Commercial Flying:</strong> Any flight that's not purely recreational requires a Part 107 license. This includes real estate photography, paid videography, inspections, or any flight where you're compensated. Even posting drone footage on YouTube with monetization enabled technically requires Part 107 certification.</p>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 SkyPilot Hub. Fly Safe, Fly Smart. Created for drone enthusiasts in California.</p>
+    </footer>
+</body>
+</html>
